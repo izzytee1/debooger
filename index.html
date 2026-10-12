@@ -6,8 +6,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <title>DEBOOGER2000 | Visual Project Viewer & Inspector — V25</title>
-  <!-- DEBOOGER2000 V25: standalone visual project viewer, inspector, auditor, and exporter. -->
+  <title>DEBOOGER2000 | Visual Project Viewer & Inspector — V26</title>
+  <!-- DEBOOGER2000 V26: standalone visual project viewer, inspector, auditor, and exporter. -->
   <!-- Bundled ZIP engine: JSZip 3.10.1 (MIT/GPLv3 dual licensed; upstream license notice retained below). -->
   
   <style>
@@ -450,9 +450,129 @@
 #workspace-more-menu.tools-modal .tools-modal-group label:hover { background:#f8fafc; }#workspace-more-menu.tools-modal select { height:30px; background:#fff; color:#334155; }.visual-inspector-panel {position:absolute;right:10px;top:10px;z-index:88;width:min(500px,calc(100% - 20px));max-height:min(640px,calc(100vh - 24px));background:#fff;border:1px solid #cbd5e1;border-radius:10px;box-shadow:0 14px 34px rgba(15,23,42,.16);display:none;flex-direction:column;overflow:hidden;color:var(--text-main);scrollbar-width:thin;scrollbar-color:#cbd5e1 transparent;}.visual-inspector-body, .visual-source-hint { scrollbar-width:thin; scrollbar-color:#cbd5e1 transparent; }.visual-inspector-body::-webkit-scrollbar,.visual-source-hint::-webkit-scrollbar { width:4px; height:4px; }.visual-inspector-body::-webkit-scrollbar-thumb,.visual-source-hint::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:999px; }@media (max-width: 900px) {#workspace-more-menu.tools-modal { left:8px; right:8px; top:auto; bottom:8px; transform:none; width:auto; max-height:72dvh; border-radius:10px; padding:10px; }.tools-modal-grid { grid-template-columns:1fr; gap:8px; }.tools-modal-head { font-size:14px; padding-bottom:9px; margin-bottom:9px; }}
 </style>
 
+<style id="d2-v26-mobile-shell">
+  .mobile-primary-nav { display: none; }
+
+  @media (max-width: 900px) {
+    body.mobile-shell-v26:not(.workspace-view-active) .main-viewport {
+      padding-bottom: calc(58px + env(safe-area-inset-bottom));
+    }
+
+    .mobile-primary-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 3950;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      min-height: 58px;
+      padding-bottom: env(safe-area-inset-bottom);
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,.98);
+      box-shadow: 0 -8px 24px rgba(15,23,42,.06);
+    }
+
+    .mobile-primary-nav button {
+      min-width: 0;
+      border: 0;
+      border-right: 1px solid var(--border-subtle);
+      background: transparent;
+      color: var(--text-muted);
+      font: inherit;
+      font-size: 11px;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    .mobile-primary-nav button:last-child { border-right: 0; }
+    .mobile-primary-nav button.active {
+      color: var(--text-main);
+      background: #f1f5f9;
+      box-shadow: inset 0 2px 0 #334155;
+    }
+
+    body.mobile-shell-v26.workspace-view-active .main-viewport {
+      inset: 0 0 calc(102px + env(safe-area-inset-bottom)) 0;
+    }
+
+    body.mobile-shell-v26.workspace-view-active .mobile-workspace-tabs {
+      bottom: calc(58px + env(safe-area-inset-bottom));
+      height: 44px;
+      z-index: 3960;
+      padding-bottom: 0;
+      box-shadow: 0 -4px 14px rgba(15,23,42,.04);
+    }
+
+    body.mobile-shell-v26.workspace-view-active .mobile-workspace-tabs button {
+      font-size: 11px;
+      min-height: 44px;
+    }
+
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-preview .workspace-pane-left,
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-preview .workspace-pane-right,
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-files .workspace-pane-center,
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-files .workspace-pane-right,
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-results .workspace-pane-left,
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-results .workspace-pane-center {
+      display: none !important;
+    }
+
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-preview .workspace-pane-center,
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-files .workspace-pane-left,
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-results .workspace-pane-right {
+      display: flex !important;
+      transform: none !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      box-shadow: none !important;
+      z-index: 1;
+    }
+
+    body.mobile-shell-v26.workspace-view-active .mobile-preview-controls {
+      top: max(6px, env(safe-area-inset-top));
+      left: 6px;
+      right: 6px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid rgba(203,213,225,.78);
+      border-radius: 8px;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 6px 18px rgba(15,23,42,.10);
+      backdrop-filter: blur(8px);
+    }
+
+    body.mobile-shell-v26.workspace-view-active .mobile-preview-controls button {
+      width: 100%;
+      height: 32px;
+      padding: 0 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      background: #fff;
+      border-color: #cbd5e1;
+      font-size: 10px;
+    }
+
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-files .pane-header,
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-results .pane-header {
+      min-height: 48px;
+      padding: 10px 12px;
+    }
+
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-files .file-tree-list,
+    body.mobile-shell-v26.workspace-view-active.mobile-workspace-results .debooger-pane {
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+</style>
+
 
 </head>
-<body>
+<body class="mobile-shell-v26">
 
   <!-- Sidebar Navigation -->
 
@@ -771,7 +891,14 @@
 
   </div>
 
-  <nav class="mobile-workspace-tabs" id="mobile-workspace-tabs" aria-label="Mobile workspace pages">
+  <nav class="mobile-primary-nav" id="mobile-primary-nav" aria-label="Main pages">
+    <button type="button" data-mobile-view="view-home" onclick="switchView('view-home')" class="active">Home</button>
+    <button type="button" data-mobile-view="view-workspace" onclick="switchView('view-workspace')">Viewer</button>
+    <button type="button" data-mobile-view="view-styles" onclick="switchView('view-styles')">Design</button>
+    <button type="button" data-mobile-view="view-history" onclick="switchView('view-history')">History</button>
+  </nav>
+
+  <nav class="mobile-workspace-tabs" id="mobile-workspace-tabs" aria-label="Viewer pages">
     <button type="button" data-mobile-screen="files" onclick="setMobileWorkspaceScreen('files')">Files</button>
     <button type="button" data-mobile-screen="preview" onclick="setMobileWorkspaceScreen('preview')" class="active">Preview</button>
     <button type="button" data-mobile-screen="results" onclick="setMobileWorkspaceScreen('results')">Results</button>
@@ -810,7 +937,7 @@
           <select id="settings-default-preview" onchange="setDefaultPreview(this.value)"><option value="desktop">Desktop</option><option value="wide1200">1200</option><option value="mobile">Mobile</option></select>
         </div>
         <div style="font-size:12px;color:var(--text-muted);line-height:1.5;">
-          D2 v25 is a standalone browser viewer. React 18, ReactDOM, the JSX runtime, Scheduler, and the TSX/TypeScript compiler are embedded. Source-only React can open without downloading those core packages. Uncommon npm dependencies can still use the optional network fallback, while a full npm/Vite build requires the WebContainer-compatible HTTPS/localhost mode. Electron main/native processes are not executed in the browser viewer.
+          D2 v26 is a standalone browser viewer. React 18, ReactDOM, the JSX runtime, Scheduler, and the TSX/TypeScript compiler are embedded. Source-only React can open without downloading those core packages. Uncommon npm dependencies can still use the optional network fallback, while a full npm/Vite build requires the WebContainer-compatible HTTPS/localhost mode. Electron main/native processes are not executed in the browser viewer.
         </div>
       </div>
     </div>
@@ -889,7 +1016,7 @@
 
   <!-- Main Application Logic Script -->
 <script>
-/* D2 V25 engine. */
+/* D2 V26 engine. */
 
 
 /*!
@@ -18999,6 +19126,7 @@ module.exports = ZStream;
       setupFloatingExitDrag();
       setupHoverScrollbars();
       loadDefaultPreviewPreference();
+      syncResponsiveWorkspace();
       window.addEventListener('resize', syncResponsiveWorkspace);
       window.addEventListener('orientationchange', () => setTimeout(syncResponsiveWorkspace, 120));
       const renameInput = document.getElementById('rename-project-input');
@@ -19012,10 +19140,17 @@ module.exports = ZStream;
     function setMobileWorkspaceScreen(screen, options = {}) {
       if (!['files','preview','results'].includes(screen)) screen = 'preview';
       STATE.mobileWorkspaceScreen = screen;
+      if (window.matchMedia('(max-width: 900px)').matches) {
+        document.querySelectorAll('.workspace-pane-left.drawer-open, .workspace-pane-right.drawer-open').forEach(pane => pane.classList.remove('drawer-open'));
+      }
       document.body.classList.toggle('mobile-workspace-files', screen === 'files');
       document.body.classList.toggle('mobile-workspace-preview', screen === 'preview');
       document.body.classList.toggle('mobile-workspace-results', screen === 'results');
-      document.querySelectorAll('[data-mobile-screen]').forEach(btn => btn.classList.toggle('active', btn.dataset.mobileScreen === screen));
+      document.querySelectorAll('[data-mobile-screen]').forEach(btn => {
+        const active = btn.dataset.mobileScreen === screen;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-current', active ? 'page' : 'false');
+      });
       if (screen === 'preview') requestAnimationFrame(applyPreviewLayout);
       if (!options.skipSave) scheduleWorkspaceSave(250);
     }
@@ -19252,6 +19387,11 @@ module.exports = ZStream;
       closeWorkspacePopovers();
       document.querySelectorAll('.view-container, .view-fullscreen-flex').forEach(v => {
         v.classList.toggle('active', v.id === viewId);
+      });
+      document.querySelectorAll('[data-mobile-view]').forEach(btn => {
+        const active = btn.dataset.mobileView === viewId;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-current', active ? 'page' : 'false');
       });
       if (viewId === 'view-styles') { renderDesignInspector(); }
       syncMobileWorkspaceScreen();
@@ -20859,7 +20999,7 @@ h1.file{font-size:15px;margin:0 0 12px} pre{white-space:pre-wrap;word-break:brea
     let LIVE_REACT_PREVIEW_GEN = 0;
     let SUCRASE_PROMISE = null;
 
-    // D2 v25 offline-first React source preview.
+    // D2 v26 offline-first React source preview.
     // React/ReactDOM 18.2 are embedded from MIT-licensed upstream builds.
     // TypeScript is embedded in gzip form (Apache-2.0) and evaluated only when TS/TSX/JSX preview needs it.
     const D2_EMBEDDED_REACT_VERSION = '18.2.0';
@@ -21000,7 +21140,7 @@ h1.file{font-size:15px;margin:0 0 12px} pre{white-space:pre-wrap;word-break:brea
         else if (!pkg) add(pkgInfo.path, 'The package manifest exists but is not valid JSON.');
         if (!findReactSourceEntry(files)) add('src/main.tsx, src/main.jsx, src/index.tsx, src/index.jsx, or App.tsx/App.jsx', 'A React entry component is required to start the source preview.');
         if (!compiled) {
-          add('dist/index.html, build/index.html, or out/index.html', 'This is the most reliable visual preview. If it is missing, DEBOOGER will try the source-only browser fallback.');
+          add('A deployable compiled output folder', 'DEBOOGER recognizes standard and configured React/framework output folders. If one is missing, it will try the source-only browser fallback.');
           const wc = getWebContainerSupport();
           if (!wc.supported) add('Full Vite Builder mode', wc.reason || 'Open D2 in a WebContainer-compatible browser session to build the missing dist automatically.');
         }
@@ -21225,24 +21365,35 @@ code{font-family:"Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSyste
       const onOutput = typeof options.onOutput === 'function' ? options.onOutput : () => {};
       const installLog = await runWebContainerCommand(wc, 'npm', ['install', '--no-audit', '--no-fund'], { timeoutMs: options.installTimeoutMs || 180000, onOutput });
       const buildLog = await runWebContainerCommand(wc, 'npm', ['run', 'build'], { timeoutMs: options.buildTimeoutMs || 120000, onOutput });
-      const candidates = ['dist', 'build', 'out', 'storybook-static'];
+      const configured = configuredWebBuildDirectories(files).map(path => path.split('/')[0]).filter(Boolean);
+      const candidates = [...new Set([...configured, 'dist', 'build', 'out', 'output', 'release', 'site', 'www', 'web-build', 'storybook-static', '.output', '.vercel', 'public', 'docs'])];
       let outputDir = '';
+      let outputEntry = '';
+      let built = null;
       for (const candidate of candidates) {
-        if (await webContainerPathExists(wc, '/' + candidate + '/index.html')) { outputDir = candidate; break; }
+        if (!await webContainerPathExists(wc, '/' + candidate)) continue;
+        try {
+          const candidateFiles = await readWebContainerDirectory(wc, '/' + candidate, candidate, {});
+          const candidateEntry = findCompiledWebEntry(candidateFiles);
+          if (candidateEntry) {
+            outputDir = candidate;
+            outputEntry = candidateEntry;
+            built = candidateFiles;
+            break;
+          }
+        } catch (_) {}
       }
-      if (!outputDir) throw new Error('The build finished, but no dist/index.html, build/index.html, out/index.html, or storybook-static/index.html was created.');
-      const built = await readWebContainerDirectory(wc, '/' + outputDir, outputDir, {});
-      if (!built[outputDir + '/index.html']) throw new Error('The Vite builder did not return an index.html file.');
+      if (!outputDir || !built || !outputEntry) throw new Error('The build finished, but no deployable index.html was found in a compiled output folder. Check the build output setting in the project configuration.');
       if (files === STATE.files) {
         Object.entries(built).forEach(([path, file]) => { STATE.files[path] = file; });
-        STATE.entryFile = outputDir + '/index.html';
+        STATE.entryFile = outputEntry;
         STATE.selectedFile = STATE.entryFile;
         renderFileTree();
         reRunAudit();
         buildSandboxLiveViewer();
         scheduleWorkspaceSave();
       }
-      return { outputDir, files: built, installLog, buildLog };
+      return { outputDir, outputEntry, files: built, installLog, buildLog };
     }
 
     async function tryWebContainerBuild() {
@@ -21256,7 +21407,7 @@ code{font-family:"Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSyste
       addConsoleLog('info', '[VITE BUILDER] Installing dependencies and running the real project build…', 'vite-builder-run');
       try {
         const result = await buildReactWithWebContainer(STATE.files, { onOutput: text => addConsoleLog('info', '[VITE] ' + String(text).trim()) });
-        addConsoleLog('info', '[VITE BUILDER] Build finished: ' + result.outputDir + '/index.html', 'vite-builder-success');
+        addConsoleLog('info', '[VITE BUILDER] Build finished: ' + result.outputEntry, 'vite-builder-success');
         showToast('Vite build finished. Opening compiled page.');
         return result;
       } catch (err) {
@@ -21854,6 +22005,7 @@ code{font-family:"Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSyste
       const entryCode = modules[entryId] || '';
       const mountsItself = /createRoot\s*\(|ReactDOM\.render\s*\(|RouterProvider/.test(entryCode);
       const hasDefaultExport = /export\s+default\b/.test(entryCode);
+      const hasNamedAppExport = /\bexport\s+(?:async\s+)?(?:function|class|const|let|var)\s+App\b|\bexport\s*\{[^}]*\bApp\b[^}]*\}/.test(entryCode);
       const routerNorm = routerPath ? normalizeVirtualPath(routerPath) : '';
       const treeNorm = routeTreePath ? normalizeVirtualPath(routeTreePath) : '';
       if (!mountsItself && treeNorm && modules['d2:' + treeNorm]) {
@@ -21878,13 +22030,17 @@ code{font-family:"Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSyste
           'createRoot(el).render(React.createElement(RouterProvider, { router: getRouter() }));'
         ].join('\n'), routerNorm, files, pkg, aliases, collectedCss);
       } else if (!mountsItself) {
-        modules['d2:__d2_boot.jsx'] = hasDefaultExport ? [
-          'import React from "react";',
-          'import { createRoot } from "react-dom/client";',
-          'import App from "' + entryId + '";',
-          'const el = document.getElementById("root") || document.body.appendChild(Object.assign(document.createElement("div"), {id:"root"}));',
-          'createRoot(el).render(React.createElement(App));'
-        ].join('\n') : ('import "' + entryId + '";\n');
+        if (hasDefaultExport || hasNamedAppExport) {
+          modules['d2:__d2_boot.jsx'] = [
+            'import React from "react";',
+            'import { createRoot } from "react-dom/client";',
+            hasDefaultExport ? 'import App from "' + entryId + '";' : 'import { App } from "' + entryId + '";',
+            'const el = document.getElementById("root") || document.body.appendChild(Object.assign(document.createElement("div"), {id:"root"}));',
+            'createRoot(el).render(React.createElement(App));'
+          ].join('\n');
+        } else {
+          modules['d2:__d2_boot.jsx'] = 'import "' + entryId + '";\n';
+        }
       }
       const bootId = mountsItself ? entryId : 'd2:__d2_boot.jsx';
       let shell = extractHtmlShell(files, found.htmlKey);
@@ -21935,7 +22091,7 @@ ${shell}
 var bootId = ${bootIdJson};
 var wantTw = ${tailwind ? 'true' : 'false'};
 var d2ExternalPackages = ${externalPackagesJson};
-function d2Need(m){var text=String(m||'');var lower=text.toLowerCase();var need='A compiled dist/build/out folder, or the missing file/dependency named above.';var marker='Missing file:';var i=text.indexOf(marker);if(i>=0){var tail=text.slice(i+marker.length);need='Needed file: '+tail.split(String.fromCharCode(10))[0].trim();}else if(d2ExternalPackages.length&&(lower.indexOf('failed to fetch dynamically imported module')>=0||lower.indexOf('networkerror')>=0||lower.indexOf('err_failed')>=0||lower.indexOf('data:text/javascript')>=0)){need='Needed project package'+(d2ExternalPackages.length>1?'s':'')+': '+d2ExternalPackages.join(', ')+'. Internet fallback is blocked or unavailable.';}else if(lower.indexOf('failed to fetch dynamically imported module')>=0||lower.indexOf('networkerror')>=0||lower.indexOf('err_failed')>=0){need='Needed: internet access for an uncommon project package, or upload dist/index.html, build/index.html, or out/index.html.';}else{var phrases=['failed to resolve module specifier','cannot find module','cannot find package'];var found='';for(var p=0;p<phrases.length&&!found;p++){var pos=lower.indexOf(phrases[p]);if(pos>=0){var rest2=text.slice(pos+phrases[p].length).trim();var q2=rest2.charAt(0);if(q2==='"'||q2==="'"){var qend=rest2.indexOf(q2,1);found=qend>1?rest2.slice(1,qend):rest2.slice(1);}else found=rest2.split(' ')[0];}}if(found)need='Needed package/module: '+found;else if(lower.indexOf('process is not defined')>=0||lower.indexOf('require is not defined')>=0||lower.indexOf('__dirname is not defined')>=0||lower.indexOf('node:')>=0||lower.indexOf(' fs ')>=0)need='Needed: a real compiled Vite/browser build because this source uses Node-only behavior.';else if(lower.indexOf('fetch')>=0||lower.indexOf('network')>=0||lower.indexOf('internet')>=0||lower.indexOf('cdn')>=0||lower.indexOf('esm.sh')>=0||lower.indexOf('jsdelivr')>=0)need='Needed: internet access only for the uncommon package named above, or upload dist/index.html, build/index.html, or out/index.html.';}return need;}
+function d2Need(m){var text=String(m||'');var lower=text.toLowerCase();var need='A deployable compiled output folder, or the missing file/dependency named above.';var marker='Missing file:';var i=text.indexOf(marker);if(i>=0){var tail=text.slice(i+marker.length);need='Needed file: '+tail.split(String.fromCharCode(10))[0].trim();}else if(d2ExternalPackages.length&&(lower.indexOf('failed to fetch dynamically imported module')>=0||lower.indexOf('networkerror')>=0||lower.indexOf('err_failed')>=0||lower.indexOf('data:text/javascript')>=0)){need='Needed project package'+(d2ExternalPackages.length>1?'s':'')+': '+d2ExternalPackages.join(', ')+'. Internet fallback is blocked or unavailable.';}else if(lower.indexOf('failed to fetch dynamically imported module')>=0||lower.indexOf('networkerror')>=0||lower.indexOf('err_failed')>=0){need='Needed: internet access for an uncommon project package, or upload the project’s compiled output folder.';}else{var phrases=['failed to resolve module specifier','cannot find module','cannot find package'];var found='';for(var p=0;p<phrases.length&&!found;p++){var pos=lower.indexOf(phrases[p]);if(pos>=0){var rest2=text.slice(pos+phrases[p].length).trim();var q2=rest2.charAt(0);if(q2==='"'||q2==="'"){var qend=rest2.indexOf(q2,1);found=qend>1?rest2.slice(1,qend):rest2.slice(1);}else found=rest2.split(' ')[0];}}if(found)need='Needed package/module: '+found;else if(lower.indexOf('process is not defined')>=0||lower.indexOf('require is not defined')>=0||lower.indexOf('__dirname is not defined')>=0||lower.indexOf('node:')>=0||lower.indexOf(' fs ')>=0)need='Needed: a real compiled browser build because this source uses Node-only behavior.';else if(lower.indexOf('fetch')>=0||lower.indexOf('network')>=0||lower.indexOf('internet')>=0||lower.indexOf('cdn')>=0||lower.indexOf('esm.sh')>=0||lower.indexOf('jsdelivr')>=0)need='Needed: internet access for the uncommon package named above, or upload the project’s compiled output folder.';}return need;}
 function d2Fail(e){var raw=String(e&&e.message||e);var m=raw;if(/Unexpected identifier .https/i.test(m))m='The preview broke while loading a project package from the internet.';if((m.length>900||m.toLowerCase().indexOf('data:text/javascript')>=0)&&d2ExternalPackages.length){m='A project package could not load: '+d2ExternalPackages.join(', ')+'. Internet fallback is blocked or unavailable.';}else if(m.length>900){m='A generated preview module failed to run. Check Debooger for the related source or dependency finding.';}var safe=m.replace(/</g,'&lt;');var need=d2Need(raw).replace(/</g,'&lt;');document.body.style.background='#fff';document.body.innerHTML='<div style="padding:28px;max-width:620px;font-family:Inter,sans-serif;color:#0f172a"><h2 style="margin:0 0 8px;font-size:18px">Preview stopped</h2><p style="margin:0;color:#475569;line-height:1.5">'+safe+'</p><h3 style="margin:18px 0 6px;font-size:14px">What this project needs</h3><p style="margin:0;color:#475569;line-height:1.5">'+need+'</p></div>';try{parent.postMessage({type:"RUNTIME_ERROR",kind:"exception",message:m},"*");}catch(_){} }
 function d2Tw(){if(!wantTw)return;var tw=document.createElement("script");tw.type="module";tw.src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4";document.body.appendChild(tw);}
 import(bootId).then(function(){
@@ -21989,7 +22145,7 @@ setTimeout(function(){if(document.documentElement.getAttribute("data-d2-mounted"
         const html = await Promise.race([
           htmlPromise,
           new Promise((_, reject) => {
-            timer = setTimeout(() => reject(new Error('React source preview timed out while preparing the project. Upload a compiled dist/build/out folder, check internet access, or use Build React / Vite from HTTPS/localhost.')), timeoutMs);
+            timer = setTimeout(() => reject(new Error('React source preview timed out while preparing the project. Upload a deployable compiled output folder, check internet access, or use Build React / Vite from HTTPS/localhost.')), timeoutMs);
           })
         ]);
         await shellReady;
@@ -22053,7 +22209,7 @@ setTimeout(function(){if(document.documentElement.getAttribute("data-d2-mounted"
         if (!htmlHasVisibleApp(html) && html.length < 8000) return;
         let score = Math.min(30, Math.floor(html.length / 15000));
         if (htmlHasVisibleApp(html)) score += 50;
-        if (/(^|\/)(?:dist|build|out|storybook-static|\.vercel\/output\/static)\/index\.html?$/i.test(k)) score += 200;
+        if (findCompiledWebEntries(files).includes(k)) score += 200;
         if (/(^|\/)(?:public|demo|preview|examples|example)\/index\.html?$/i.test(k)) score += 120;
         if (/^index\.html?$/i.test(k)) score += 30;
         if (score > bestScore) { bestScore = score; best = k; }
@@ -22061,10 +22217,88 @@ setTimeout(function(){if(document.documentElement.getAttribute("data-d2-mounted"
       return best;
     }
 
+    function configuredWebBuildDirectories(files = STATE.files) {
+      const dirs = new Set();
+      const add = value => {
+        if (typeof value !== 'string') return;
+        const clean = normalizeVirtualPath(value.replace(/^\.\//, '').replace(/\/$/, ''));
+        if (clean && clean !== '.' && !clean.includes('node_modules') && !clean.includes('..')) dirs.add(clean);
+      };
+      const pkgInfo = readProjectPackageJson(files);
+      const projectRoot = pkgInfo.path ? normalizeVirtualPath(pkgInfo.path).replace(/[^/]+$/, '') : '';
+      const addAtRoot = value => {
+        if (typeof value !== 'string') return;
+        const clean = normalizeVirtualPath(value.replace(/^\.\//, '').replace(/\/$/, ''));
+        add(projectRoot + clean);
+        add(clean);
+      };
+      const pkg = pkgInfo.pkg || {};
+      [pkg.output, pkg.outDir, pkg.buildDir, pkg.publish, pkg.directories && pkg.directories.output].forEach(addAtRoot);
+
+      Object.entries(files || {}).forEach(([path, file]) => {
+        if (!file || file.binary) return;
+        const name = String(path).split('/').pop().toLowerCase();
+        const text = getVirtualFileText(file);
+        if (/^(?:vite|astro)\.config\.(?:js|ts|mjs|cjs)$/.test(name)) {
+          const match = text.match(/\boutDir\s*:\s*['"]([^'"]+)['"]/);
+          if (match) addAtRoot(match[1]);
+        } else if (/^next\.config\.(?:js|ts|mjs|cjs)$/.test(name)) {
+          const match = text.match(/\bdistDir\s*:\s*['"]([^'"]+)['"]/);
+          if (match) addAtRoot(match[1]);
+        } else if (name === 'netlify.toml') {
+          const match = text.match(/\bpublish\s*=\s*['"]([^'"]+)['"]/);
+          if (match) addAtRoot(match[1]);
+        } else if (/^(?:angular|vercel|firebase)\.json$/.test(name)) {
+          try {
+            const data = JSON.parse(text);
+            const walk = value => {
+              if (!value || typeof value !== 'object') return;
+              Object.entries(value).forEach(([key, child]) => {
+                if (/^(?:outputPath|outputDirectory|public)$/i.test(key)) addAtRoot(child);
+                else walk(child);
+              });
+            };
+            walk(data);
+          } catch (_) {}
+        }
+      });
+      return [...dirs];
+    }
+
+    function findCompiledWebEntries(files = STATE.files) {
+      const configured = configuredWebBuildDirectories(files);
+      const knownOutput = /(?:^|\/)(?:dist|build|out|output|release|site|www|web-build|storybook-static|\.output\/public|\.vercel\/output\/static)(?:\/|$)/i;
+      return Object.keys(files || {}).filter(path => {
+        const file = files[path];
+        if (!file || file.binary || !/(^|\/)index\.html?$/i.test(path)) return false;
+        if (/(^|\/)(?:node_modules|coverage|test-results|playwright-report)(?:\/|$)/i.test(path)) return false;
+        const normalized = normalizeVirtualPath(path);
+        const inConfiguredOutput = configured.some(dir => normalized === dir + '/index.html' || normalized.startsWith(dir + '/'));
+        const isKnownOutput = knownOutput.test(normalized);
+        const isFrameworkPublic = /(?:^|\/)(?:public|docs)\/index\.html?$/i.test(normalized);
+        if (!inConfiguredOutput && !isKnownOutput && !isFrameworkPublic) return false;
+        const html = getVirtualFileText(file);
+        if (!html || htmlIsStubPage(html) || htmlBootsFrameworkSource(html)) return false;
+        if (isFrameworkPublic && !isKnownOutput && !inConfiguredOutput && (html.length < 4000 || !htmlHasVisibleApp(html))) return false;
+        return htmlLooksLikeReadyPreview(html);
+      }).sort((a, b) => {
+        const score = path => {
+          let value = 0;
+          if (configured.some(dir => path === dir + '/index.html' || path.startsWith(dir + '/'))) value += 1000;
+          if (/(^|\/)dist\/[^/]+\/browser\/index\.html?$/i.test(path)) value += 950;
+          if (/(^|\/)build\/client\/index\.html?$/i.test(path)) value += 925;
+          if (/(^|\/)(?:\.output\/public|\.vercel\/output\/static|storybook-static)\/index\.html?$/i.test(path)) value += 900;
+          if (/(^|\/)(?:dist|build|out|web-build|www)\/index\.html?$/i.test(path)) value += 850;
+          if (/(^|\/)(?:output|release|site|public|docs)\/index\.html?$/i.test(path)) value += 700;
+          value -= path.split('/').length;
+          return value;
+        };
+        return score(b) - score(a) || a.length - b.length;
+      });
+    }
+
     function findCompiledWebEntry(files = STATE.files) {
-      return Object.keys(files || {})
-        .filter(k => /(^|\/)(?:dist|build|out|storybook-static|\.vercel\/output\/static)\/index\.html?$/i.test(k))
-        .sort((a, b) => a.split('/').length - b.split('/').length || a.length - b.length)[0] || null;
+      return findCompiledWebEntries(files)[0] || null;
     }
 
     function htmlLooksLikeReadyPreview(html) {
@@ -22108,7 +22342,7 @@ setTimeout(function(){if(document.documentElement.getAttribute("data-d2-mounted"
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>React build required</title>
 <style>body{margin:0;padding:28px;background:#f8fafc;color:#0f172a;font-family:"Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;line-height:1.5}.box{max-width:760px;margin:30px auto;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:22px}h2{margin:0 0 8px;font-size:20px}p{color:#64748b;font-size:13px}code{font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif}</style></head>
-<body><div class="box"><h2>Compiled React/Vite output required</h2><p>DEBOOGER found React source at <code>${sourceLabel}</code>, but no compiled <code>dist/index.html</code>, <code>build/index.html</code>, or <code>out/index.html</code>. Raw JSX/TSX is not being falsely presented as a completed browser build.</p><p>Run the project’s normal build first, then load the resulting compiled folder or ZIP. DEBOOGER will inline its local CSS, JavaScript, images, and other assets into a standalone HTML file.</p></div></body>
+<body><div class="box"><h2>Compiled React output required</h2><p>DEBOOGER found React source at <code>${sourceLabel}</code>, but no deployable compiled output folder. It checks standard and project-configured output locations before using source preview.</p><p>Run the project’s normal build first, then load the resulting compiled folder or ZIP. DEBOOGER will inline its local CSS, JavaScript, images, fonts, and other assets into a standalone HTML file.</p></div></body>
 </html>`;
     }
 
@@ -25533,8 +25767,8 @@ showToast('Correction deleted.');
 
 /* D2 engine load marker */
 window.D2_ENGINE_READY = true;
-window.D2_ENGINE_VERSION = 'v25';
-try { window.dispatchEvent(new CustomEvent('d2-engine-ready', { detail: { version: 'v25' } })); } catch (_) {}
+window.D2_ENGINE_VERSION = 'v26';
+try { window.dispatchEvent(new CustomEvent('d2-engine-ready', { detail: { version: 'v26' } })); } catch (_) {}
 
 </script>
 
