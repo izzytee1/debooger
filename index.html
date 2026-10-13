@@ -6,8 +6,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <title>DEBOOGER2000 | Visual Project Viewer & Inspector — V26</title>
-  <!-- DEBOOGER2000 V26: standalone visual project viewer, inspector, auditor, and exporter. -->
+  <title>DEBOOGER2000 | Visual Project Viewer & Inspector — V27</title>
+  <!-- DEBOOGER2000 V27: standalone visual project viewer, inspector, auditor, and exporter. -->
   <!-- Bundled ZIP engine: JSZip 3.10.1 (MIT/GPLv3 dual licensed; upstream license notice retained below). -->
   
   <style>
@@ -450,7 +450,7 @@
 #workspace-more-menu.tools-modal .tools-modal-group label:hover { background:#f8fafc; }#workspace-more-menu.tools-modal select { height:30px; background:#fff; color:#334155; }.visual-inspector-panel {position:absolute;right:10px;top:10px;z-index:88;width:min(500px,calc(100% - 20px));max-height:min(640px,calc(100vh - 24px));background:#fff;border:1px solid #cbd5e1;border-radius:10px;box-shadow:0 14px 34px rgba(15,23,42,.16);display:none;flex-direction:column;overflow:hidden;color:var(--text-main);scrollbar-width:thin;scrollbar-color:#cbd5e1 transparent;}.visual-inspector-body, .visual-source-hint { scrollbar-width:thin; scrollbar-color:#cbd5e1 transparent; }.visual-inspector-body::-webkit-scrollbar,.visual-source-hint::-webkit-scrollbar { width:4px; height:4px; }.visual-inspector-body::-webkit-scrollbar-thumb,.visual-source-hint::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:999px; }@media (max-width: 900px) {#workspace-more-menu.tools-modal { left:8px; right:8px; top:auto; bottom:8px; transform:none; width:auto; max-height:72dvh; border-radius:10px; padding:10px; }.tools-modal-grid { grid-template-columns:1fr; gap:8px; }.tools-modal-head { font-size:14px; padding-bottom:9px; margin-bottom:9px; }}
 </style>
 
-<style id="d2-v26-mobile-shell">
+<style id="d2-v27-mobile-shell">
   .mobile-primary-nav { display: none; }
 
   @media (max-width: 900px) {
@@ -937,7 +937,7 @@
           <select id="settings-default-preview" onchange="setDefaultPreview(this.value)"><option value="desktop">Desktop</option><option value="wide1200">1200</option><option value="mobile">Mobile</option></select>
         </div>
         <div style="font-size:12px;color:var(--text-muted);line-height:1.5;">
-          D2 v26 is a standalone browser viewer. React 18, ReactDOM, the JSX runtime, Scheduler, and the TSX/TypeScript compiler are embedded. Source-only React can open without downloading those core packages. Uncommon npm dependencies can still use the optional network fallback, while a full npm/Vite build requires the WebContainer-compatible HTTPS/localhost mode. Electron main/native processes are not executed in the browser viewer.
+          D2 v27 is a standalone browser viewer. React 18, ReactDOM, the JSX runtime, Scheduler, and the TSX/TypeScript compiler are embedded. Source-only React can open without downloading those core packages. Uncommon npm dependencies can still use the optional network fallback, while a full npm/Vite build requires the WebContainer-compatible HTTPS/localhost mode. Electron main/native processes are not executed in the browser viewer.
         </div>
       </div>
     </div>
@@ -20999,7 +20999,7 @@ h1.file{font-size:15px;margin:0 0 12px} pre{white-space:pre-wrap;word-break:brea
     let LIVE_REACT_PREVIEW_GEN = 0;
     let SUCRASE_PROMISE = null;
 
-    // D2 v26 offline-first React source preview.
+    // D2 v27 offline-first React source preview.
     // React/ReactDOM 18.2 are embedded from MIT-licensed upstream builds.
     // TypeScript is embedded in gzip form (Apache-2.0) and evaluated only when TS/TSX/JSX preview needs it.
     const D2_EMBEDDED_REACT_VERSION = '18.2.0';
@@ -22267,24 +22267,28 @@ setTimeout(function(){if(document.documentElement.getAttribute("data-d2-mounted"
 
     function findCompiledWebEntries(files = STATE.files) {
       const configured = configuredWebBuildDirectories(files);
-      const knownOutput = /(?:^|\/)(?:dist|build|out|output|release|site|www|web-build|storybook-static|\.output\/public|\.vercel\/output\/static)(?:\/|$)/i;
+      const knownOutput = /(?:^|\/)(?:dist|build|out|output|release|site|www|web-build|storybook-static|\.output\/(?:public|server)|\.vercel\/output\/(?:static|config)|client|browser|public|docs)(?:\/|$)/i;
       return Object.keys(files || {}).filter(path => {
         const file = files[path];
-        if (!file || file.binary || !/(^|\/)index\.html?$/i.test(path)) return false;
+        if (!file || file.binary || !/\.html?$/i.test(path)) return false;
         if (/(^|\/)(?:node_modules|coverage|test-results|playwright-report)(?:\/|$)/i.test(path)) return false;
         const normalized = normalizeVirtualPath(path);
-        const inConfiguredOutput = configured.some(dir => normalized === dir + '/index.html' || normalized.startsWith(dir + '/'));
+        const inConfiguredOutput = configured.some(dir => normalized.startsWith(dir + '/'));
         const isKnownOutput = knownOutput.test(normalized);
-        const isFrameworkPublic = /(?:^|\/)(?:public|docs)\/index\.html?$/i.test(normalized);
-        if (!inConfiguredOutput && !isKnownOutput && !isFrameworkPublic) return false;
+        const inFrameworkBuild = /(?:^|\/)(?:\.next\/static|\.nuxt\/dist\/client|\.output\/public|\.vercel\/output\/static|dist\/[^/]+\/browser|build\/client|public|docs|storybook-static)(?:\/|$)/i.test(normalized);
+        const isIndex = /(?:^|\/)index\.html?$/i.test(normalized);
+        if (!inConfiguredOutput && !isKnownOutput && !inFrameworkBuild) return false;
         const html = getVirtualFileText(file);
         if (!html || htmlIsStubPage(html) || htmlBootsFrameworkSource(html)) return false;
-        if (isFrameworkPublic && !isKnownOutput && !inConfiguredOutput && (html.length < 4000 || !htmlHasVisibleApp(html))) return false;
-        return htmlLooksLikeReadyPreview(html);
+        if (!htmlLooksLikeReadyPreview(html)) return false;
+        if (!isIndex && !/<script\b[^>]*\bsrc\s*=|<link\b[^>]*\bhref\s*=|<main\b|<body\b/i.test(html)) return false;
+        if ((/\/public\/|\/docs\//i.test('/' + normalized) || inFrameworkBuild) && !htmlHasVisibleApp(html) && !/<script\b/i.test(html)) return false;
+        return true;
       }).sort((a, b) => {
         const score = path => {
           let value = 0;
-          if (configured.some(dir => path === dir + '/index.html' || path.startsWith(dir + '/'))) value += 1000;
+          if (configured.some(dir => path.startsWith(dir + '/'))) value += 1000;
+          if (/(?:^|\/)index\.html?$/i.test(path)) value += 50;
           if (/(^|\/)dist\/[^/]+\/browser\/index\.html?$/i.test(path)) value += 950;
           if (/(^|\/)build\/client\/index\.html?$/i.test(path)) value += 925;
           if (/(^|\/)(?:\.output\/public|\.vercel\/output\/static|storybook-static)\/index\.html?$/i.test(path)) value += 900;
@@ -25767,8 +25771,8 @@ showToast('Correction deleted.');
 
 /* D2 engine load marker */
 window.D2_ENGINE_READY = true;
-window.D2_ENGINE_VERSION = 'v26';
-try { window.dispatchEvent(new CustomEvent('d2-engine-ready', { detail: { version: 'v26' } })); } catch (_) {}
+window.D2_ENGINE_VERSION = 'v27';
+try { window.dispatchEvent(new CustomEvent('d2-engine-ready', { detail: { version: 'v27' } })); } catch (_) {}
 
 </script>
 
