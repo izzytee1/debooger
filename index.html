@@ -6,8 +6,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <title>DEBOOGER2000 | Visual Project Viewer & Inspector — V30</title>
-  <!-- DEBOOGER2000 V30: standalone visual project viewer, inspector, auditor, and exporter. -->
+  <title>DEBOOGER2000 | Visual Project Viewer & Inspector — V31</title>
+  <!-- DEBOOGER2000 V31: standalone visual project viewer, inspector, auditor, and exporter. -->
   <!-- Bundled ZIP engine: JSZip 3.10.1 (MIT/GPLv3 dual licensed; upstream license notice retained below). -->
   
   <style>
@@ -428,7 +428,7 @@
       gap: 10px;
       width: min(720px, 100%);
       margin: 0 auto;
-    }.dropzone-actions .btn { width: 100%; justify-content: center; min-width: 0; white-space: normal; text-align: center; }.mobile-intake-secondary { display: none; }body.panoramic-preview { overflow: hidden !important; background: #000 !important; }body.panoramic-preview header, body.panoramic-preview .workspace-pane-left, body.panoramic-preview .workspace-pane-right, body.panoramic-preview .visual-inspector-panel{ display: none !important; }body.panoramic-preview .main-viewport { margin: 0 !important; width: 100dvw !important; height: 100dvh !important; min-width: 0 !important; overflow: hidden !important; }body.panoramic-preview #view-workspace { display: flex !important; width: 100dvw !important; height: 100dvh !important; }body.panoramic-preview .workspace-pane-center { position: fixed !important; inset: 0 !important; width: 100dvw !important; height: 100dvh !important; z-index: 4000; }body.panoramic-preview .stage-container { position: fixed !important; inset: 0 !important; width: 100dvw !important; height: 100dvh !important; padding: 0 !important; margin: 0 !important; overflow: hidden !important; background: #000 !important; }body.panoramic-preview .preview-sizer { width: 100% !important; height: 100% !important; }body.panoramic-preview .device-viewport.desktop-frame { width: var(--d2-preview-w, 1200px) !important; min-width: var(--d2-preview-w, 1200px) !important; max-width: none !important; height: var(--d2-preview-h, 800px) !important; max-height: none !important; transform-origin: 0 0; }.panoramic-exit { display:none; position:fixed; z-index:6000; top:8px; left:8px; height:30px; min-width:46px; padding:0 10px; border:1px solid rgba(255,255,255,.35); border-radius:6px; background:rgba(15,23,42,.88); color:#fff; font-weight:700; font-size:10px; pointer-events:auto; cursor:grab; touch-action:none; user-select:none; }.panoramic-exit:active { cursor:grabbing; }body.panoramic-preview .panoramic-exit { display: inline-flex; align-items: center; }@media (pointer: fine) {body.panoramic-preview .preview-gesture-layer { pointer-events: none; }}.visual-inspector-panel .target-chooser { gap:6px; margin-bottom:2px; }.visual-inspector-panel .target-chooser button { min-height:27px; height:auto; border-radius:5px; background:#fff; color:#475569; font-size:10.5px; font-weight:400; }.visual-inspector-panel .target-chooser button.active { background:#eef3f8; color:#334155; border-color:#aebdca; }.visual-inspector-panel .inspector-section > summary { font-weight:400; background:#f8fafc; text-transform:none; letter-spacing:0; font-size:10.5px; }.visual-inspector-panel .inspector-kv dt { font-weight:400; }.visual-inspector-panel .btn { font-weight:400; }@media (min-width: 701px) {.visual-inspector-panel:has(.visual-inspector-advanced[open]) { width:min(680px, calc(100% - 20px)); }}@media (max-width: 700px) {.visual-inspector-panel { right:6px; top:6px; width:calc(100% - 12px); max-height:calc(100vh - 18px); }}@media (min-width: 901px) {.workspace-device-btn, .workspace-icon-btn{ font-size:13px; color:#263548; font-weight:600; padding-left:10px; padding-right:10px; }#btn-inspect-toolbar.inspect-active { background:var(--primary-light) !important; color:var(--primary-dark) !important; box-shadow:inset 0 -2px 0 var(--primary); }#btn-workspace-more.active { background:#eef3f8; color:#243447; box-shadow:inset 0 -2px 0 #94a3b8; }}.workspace-tools-backdrop { position:fixed; inset:0; z-index:145; background:rgba(248,250,252,.80); backdrop-filter:blur(1px); display:none; }.workspace-tools-backdrop.open { display:block; }#workspace-more-menu.tools-modal {
+    }.dropzone-actions .btn { width: 100%; justify-content: center; min-width: 0; white-space: normal; text-align: center; }.mobile-intake-secondary { display: none; }body.panoramic-preview { overflow: hidden !important; background: #000 !important; }body.panoramic-preview header, body.panoramic-preview .workspace-pane-left, body.panoramic-preview .workspace-pane-right, body.panoramic-preview .visual-inspector-panel{ display: none !important; }body.panoramic-preview .main-viewport { margin: 0 !important; width: 100dvw !important; height: 100dvh !important; min-width: 0 !important; overflow: hidden !important; }body.panoramic-preview #view-workspace { display: flex !important; width: 100dvw !important; height: 100dvh !important; }body.panoramic-preview .workspace-pane-center { position: fixed !important; inset: 0 !important; width: 100dvw !important; height: 100dvh !important; z-index: 4000; }body.panoramic-preview .stage-container { position: fixed !important; inset: 0 !important; width: 100dvw !important; height: 100dvh !important; padding: 0 !important; margin: 0 !important; overflow: hidden !important; background: #000 !important; }body.panoramic-preview .preview-sizer { width: 100% !important; height: 100% !important; }body.panoramic-preview .device-viewport.desktop-frame { width: var(--d2-preview-w, 1200px) !important; min-width: var(--d2-preview-w, 1200px) !important; max-width: none !important; height: var(--d2-preview-h, 800px) !important; max-height: none !important; transform-origin: 0 0; }.panoramic-exit { display:none; position:fixed; z-index:6000; top:8px; left:8px; height:30px; min-width:46px; padding:0 10px; border:1px solid rgba(255,255,255,.35); border-radius:6px; background:rgba(15,23,42,.88); color:#fff; font-weight:700; font-size:10px; pointer-events:auto; cursor:grab; touch-action:none; user-select:none; }.panoramic-exit:active { cursor:grabbing; }body.panoramic-preview .panoramic-exit { display: inline-flex; align-items: center; }@media (pointer: fine) {body.panoramic-preview .preview-gesture-layer { pointer-events: none; }}.visual-inspector-panel .target-chooser { gap:6px; margin-bottom:2px; }.visual-inspector-panel .target-chooser button { min-height:27px; height:auto; border-radius:5px; background:#fff; color:#475569; font-size:10.5px; font-weight:400; }.visual-design-details{margin:8px 0 10px;border:1px solid #dbe3ec;border-radius:7px;background:#fff;overflow:hidden}.visual-design-details>summary{list-style:none;cursor:pointer;padding:8px 10px;background:#f8fafc;color:#475569;font-size:10.5px;font-weight:500!important}.visual-design-details>summary::-webkit-details-marker{display:none}.visual-design-details>summary::after{content:"Hide";float:right;color:#94a3b8}.visual-design-details:not([open])>summary::after{content:"Show"}.visual-design-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:8px}.visual-design-group{min-width:0;border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden}.visual-design-group-title{padding:6px 8px;border-bottom:1px solid #eef2f7;background:#fbfcfe;color:#475569;font-size:9.5px;font-weight:600}.visual-design-row{display:grid;grid-template-columns:minmax(68px,auto) minmax(0,1fr);gap:7px;padding:5px 7px;border-bottom:1px solid #f1f5f9;align-items:center;font-size:9.5px;line-height:1.35}.visual-design-row:last-child{border-bottom:0}.visual-design-key{color:#7b8794}.visual-design-value{min-width:0;color:#1f2937;overflow-wrap:anywhere}.visual-design-color{display:inline-flex;align-items:center;gap:6px;min-width:0}.visual-design-swatch{width:14px;height:14px;flex:0 0 14px;border:1px solid #cbd5e1;border-radius:3px;background-color:#fff;background-image:linear-gradient(45deg,#eef2f7 25%,transparent 25%),linear-gradient(-45deg,#eef2f7 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#eef2f7 75%),linear-gradient(-45deg,transparent 75%,#eef2f7 75%);background-size:6px 6px;background-position:0 0,0 3px,3px -3px,-3px 0}.visual-design-swatch-fill{width:100%;height:100%;border-radius:2px}.visual-design-empty{grid-column:1/-1;padding:8px;color:#94a3b8;font-size:10px}@media(max-width:700px){.visual-design-grid{grid-template-columns:1fr}.visual-design-details{margin-top:7px}}.visual-inspector-panel .target-chooser button.active { background:#eef3f8; color:#334155; border-color:#aebdca; }.visual-inspector-panel .inspector-section > summary { font-weight:400; background:#f8fafc; text-transform:none; letter-spacing:0; font-size:10.5px; }.visual-inspector-panel .inspector-kv dt { font-weight:400; }.visual-inspector-panel .btn { font-weight:400; }@media (min-width: 701px) {.visual-inspector-panel:has(.visual-inspector-advanced[open]) { width:min(680px, calc(100% - 20px)); }}@media (max-width: 700px) {.visual-inspector-panel { right:6px; top:6px; width:calc(100% - 12px); max-height:calc(100vh - 18px); }}@media (min-width: 901px) {.workspace-device-btn, .workspace-icon-btn{ font-size:13px; color:#263548; font-weight:600; padding-left:10px; padding-right:10px; }#btn-inspect-toolbar.inspect-active { background:var(--primary-light) !important; color:var(--primary-dark) !important; box-shadow:inset 0 -2px 0 var(--primary); }#btn-workspace-more.active { background:#eef3f8; color:#243447; box-shadow:inset 0 -2px 0 #94a3b8; }}.workspace-tools-backdrop { position:fixed; inset:0; z-index:145; background:rgba(248,250,252,.80); backdrop-filter:blur(1px); display:none; }.workspace-tools-backdrop.open { display:block; }#workspace-more-menu.tools-modal {
   position:fixed; left:50%; right:auto; top:50%; transform:translate(-50%,-50%); z-index:150;
   width:min(600px,calc(100vw - 32px)); max-height:min(620px,78vh); overflow:auto;
   padding:14px; border-radius:10px; border:1px solid #cbd5e1; background:#fff;
@@ -602,7 +602,7 @@
 :root{--v30-bg:#f5f7fb;--v30-surface:#fff;--v30-panel:#fbfcfe;--v30-line:#dce3ec;--v30-text:#152238;--v30-muted:#64748b;--v30-primary:#087f6e;--v30-primary-strong:#056451;--v30-shadow:0 18px 50px rgba(20,35,55,.10);--v30-radius:14px}
 *{box-sizing:border-box}html{background:var(--v30-bg)}body{background:var(--v30-bg);color:var(--v30-text);letter-spacing:-.01em}button,.btn,select,input,textarea{font-family:inherit}button,.btn{min-height:38px;border-radius:9px;font-weight:650;transition:background .16s,border-color .16s,box-shadow .16s,transform .16s}button:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid rgba(8,127,110,.24);outline-offset:2px}.btn-primary,.primary{background:var(--v30-primary)!important;border-color:var(--v30-primary)!important;box-shadow:0 6px 16px rgba(8,127,110,.16)}.btn-primary:hover,.primary:hover{background:var(--v30-primary-strong)!important}.btn-outline,.btn-subtle{background:#fff!important;border-color:var(--v30-line)!important;color:var(--v30-text)!important}.btn-outline:hover,.btn-subtle:hover{background:#f0f7f5!important;border-color:#a9cfc7!important}
 header{height:60px!important;background:rgba(255,255,255,.94)!important;border-bottom:1px solid var(--v30-line)!important;box-shadow:0 2px 14px rgba(15,23,42,.04)!important;z-index:4000!important}.brand-mark,.logo-mark{box-shadow:0 4px 10px rgba(8,127,110,.16)}.logo-text{letter-spacing:-.045em!important}.build-mark{font-size:10px!important;padding:3px 7px;border:1px solid var(--v30-line);border-radius:999px;background:#f8fafc;color:#64748b!important}
-.main-viewport{background:var(--v30-bg)!important}.view-fullscreen-flex{padding:20px!important}.dropzone-box{border:1.5px dashed #b6c6d4!important;border-radius:18px!important;background:linear-gradient(180deg,#fff,#fbfdfd)!important;box-shadow:var(--v30-shadow)!important}.dropzone-box:hover{border-color:#55a99a!important;background:#fbfffe!important}.dropzone-actions{gap:10px!important}.dropzone-actions .btn{min-height:42px!important}.drop-icon-wrap{border-radius:14px!important}
+.main-viewport{background:var(--v30-bg)!important}.view-fullscreen-flex{padding:20px!important}.dropzone-box{border:3px dashed #9fb5c7!important;border-radius:16px!important;background:#fff!important;box-shadow:0 18px 42px rgba(20,35,55,.10),inset 0 0 0 1px rgba(255,255,255,.9)!important}.dropzone-box:hover,.dropzone-box.dragover{border-color:#4d9f90!important;background:#fbfffe!important;box-shadow:0 20px 46px rgba(20,35,55,.12),0 0 0 3px rgba(8,127,110,.06)!important}.dropzone-actions{gap:10px!important}.dropzone-actions .btn{min-height:40px!important}.drop-icon-wrap{width:60px!important;height:60px!important;border:1px solid #d2e3df!important;border-radius:12px!important;box-shadow:0 8px 20px rgba(8,127,110,.08)!important}@media (min-width:901px){.hero-card{max-width:980px!important}.dropzone-box{min-height:300px!important;padding:62px 38px!important}}
 .workspace-pane-center,.workspace-pane-left,.workspace-pane-right{background:var(--v30-surface)!important;border-color:var(--v30-line)!important}.workspace-pane-left,.workspace-pane-right{box-shadow:0 8px 24px rgba(15,23,42,.05)}.stage-container{background:#e8edf3!important;border:1px solid var(--v30-line)!important;border-radius:var(--v30-radius)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 14px 34px rgba(15,23,42,.08)!important;isolation:isolate;overscroll-behavior:contain}.preview-sizer{padding:16px!important}.mobile-preview-controls{background:rgba(255,255,255,.96)!important;border-bottom:1px solid var(--v30-line)!important;box-shadow:0 4px 14px rgba(15,23,42,.06)!important}.mobile-primary-nav{background:rgba(255,255,255,.97)!important;border-top:1px solid var(--v30-line)!important;box-shadow:0 -5px 18px rgba(15,23,42,.08)!important}.mobile-primary-nav button{font-weight:700!important;color:#64748b!important}.mobile-primary-nav button.active{color:var(--v30-primary)!important;background:#effaf7!important;box-shadow:inset 0 3px 0 var(--v30-primary)!important}
 .workspace-popover.tools-modal{border:1px solid var(--v30-line)!important;border-radius:16px!important;box-shadow:0 24px 70px rgba(15,23,42,.20)!important;background:#fff!important}.workspace-tools-backdrop{background:rgba(15,23,42,.18)!important;backdrop-filter:blur(3px)!important}.tools-modal-grid{gap:10px!important}.tools-modal-group{border-color:var(--v30-line)!important;border-radius:12px!important;background:#fbfcfe!important}.tools-modal-head{font-size:18px!important;color:var(--v30-text)!important}
 .visual-inspector-panel{border:1px solid var(--v30-line)!important;border-radius:16px!important;box-shadow:0 20px 60px rgba(15,23,42,.18)!important}.debooger-drawer,.workspace-drawer{background:#fff!important;border-color:var(--v30-line)!important}.diag-simple-head h3{letter-spacing:-.03em!important}.finding-card,.issue-card{border-radius:12px!important;border-color:var(--v30-line)!important}.mobile-paste-link{display:inline-flex!important;align-items:center;justify-content:center;min-height:40px;padding:0 14px;border:1px solid var(--v30-line);border-radius:9px;background:#fff;color:var(--v30-text);font:inherit;font-size:12px;font-weight:700;cursor:pointer}.mobile-paste-link:hover{background:#effaf7;border-color:#8bcabd}
@@ -625,7 +625,7 @@ header{height:60px!important;background:rgba(255,255,255,.94)!important;border-b
         <div class="topbar-logo">
           <div class="logo-mark">D2</div>
           <div class="logo-text">DEBOOGER<span style="color:var(--primary)">2000</span></div>
-          <span class="build-mark" aria-label="Build V30">V30</span>
+          <span class="build-mark" aria-label="Build V31">V31</span>
         </div>
       </div>
       <nav class="top-nav" aria-label="Main">
@@ -801,6 +801,10 @@ header{height:60px!important;background:rgba(255,255,255,.94)!important;border-b
           </div>
           <div class="visual-inspector-tools">
             <div class="target-chooser" id="visual-target-chooser"></div>
+            <details class="visual-design-details" id="visual-design-details" open>
+              <summary>Design details</summary>
+              <div class="visual-design-grid" id="visual-design-summary"></div>
+            </details>
             <div class="visual-edit-pane text-replace-box" id="text-replace-box">
               <label>SELECTED TEXT</label>
               <div class="text-current" id="visual-current-text"></div>
@@ -22853,6 +22857,78 @@ setTimeout(function(){if(document.documentElement.getAttribute("data-d2-mounted"
       document.getElementById('visual-edit-help')?.classList.toggle('open');
     }
 
+    function visualDesignText(value) {
+      const text = String(value == null ? '' : value).trim();
+      if (!text || text === 'normal' || text === 'none' || text === 'auto') return '';
+      return text;
+    }
+
+    function visualDesignRow(label, value, color) {
+      const text = visualDesignText(value);
+      if (!text) return null;
+      const row = document.createElement('div'); row.className = 'visual-design-row';
+      const key = document.createElement('div'); key.className = 'visual-design-key'; key.textContent = label;
+      const val = document.createElement('div'); val.className = 'visual-design-value';
+      if (color) {
+        const wrap = document.createElement('span'); wrap.className = 'visual-design-color';
+        const swatch = document.createElement('span'); swatch.className = 'visual-design-swatch';
+        const fill = document.createElement('span'); fill.className = 'visual-design-swatch-fill';
+        try { fill.style.background = String(color); } catch (_) {}
+        swatch.appendChild(fill);
+        const labelEl = document.createElement('span'); labelEl.textContent = text.toUpperCase();
+        wrap.append(swatch, labelEl); val.appendChild(wrap);
+        row.title = 'Color ' + text.toUpperCase();
+      } else val.textContent = text;
+      row.append(key, val); return row;
+    }
+
+    function visualDesignGroup(title, rows) {
+      const good = (rows || []).filter(Boolean);
+      if (!good.length) return null;
+      const group = document.createElement('section'); group.className = 'visual-design-group';
+      const head = document.createElement('div'); head.className = 'visual-design-group-title'; head.textContent = title;
+      group.appendChild(head); good.forEach(row => group.appendChild(row)); return group;
+    }
+
+    function renderVisualDesignSummary(selection) {
+      const box = document.getElementById('visual-design-summary');
+      if (!box) return;
+      box.replaceChildren();
+      if (!selection) { const empty=document.createElement('div'); empty.className='visual-design-empty'; empty.textContent='Select something in Preview to see its design.'; box.appendChild(empty); return; }
+      const c = selection.computed || {};
+      const rect = selection.rect || {};
+      const pxSize = (Number.isFinite(Number(rect.width)) && Number.isFinite(Number(rect.height))) ? `${Math.round(Number(rect.width))} × ${Math.round(Number(rect.height))} px` : '';
+      const padding = [c.paddingTop,c.paddingRight,c.paddingBottom,c.paddingLeft].filter(Boolean).join(' ');
+      const margin = [c.marginTop,c.marginRight,c.marginBottom,c.marginLeft].filter(Boolean).join(' ');
+      const border = [c.borderWidth,c.borderStyle,c.borderColor].filter(v => visualDesignText(v)).join(' ');
+      const groups = [
+        visualDesignGroup('Colors', [
+          visualDesignRow('Text', c.color, c.color),
+          visualDesignRow('Background', c.backgroundColor, c.backgroundColor),
+          visualDesignRow('Border', c.borderColor, c.borderColor)
+        ]),
+        visualDesignGroup('Typography', [
+          visualDesignRow('Font', c.fontFamily), visualDesignRow('Size', c.fontSize), visualDesignRow('Weight', c.fontWeight),
+          visualDesignRow('Line height', c.lineHeight), visualDesignRow('Letter space', c.letterSpacing), visualDesignRow('Align', c.textAlign)
+        ]),
+        visualDesignGroup('Size & Spacing', [
+          visualDesignRow('Size', pxSize), visualDesignRow('Padding', padding), visualDesignRow('Margin', margin),
+          visualDesignRow('Gap', c.gap), visualDesignRow('Row gap', c.rowGap), visualDesignRow('Column gap', c.columnGap)
+        ]),
+        visualDesignGroup('Shape & Effects', [
+          visualDesignRow('Radius', c.borderRadius), visualDesignRow('Border', border), visualDesignRow('Shadow', c.boxShadow),
+          visualDesignRow('Opacity', c.opacity), visualDesignRow('Filter', c.filter), visualDesignRow('Backdrop', c.backdropFilter)
+        ]),
+        visualDesignGroup('Layout / CSS', [
+          visualDesignRow('Display', c.display), visualDesignRow('Position', c.position), visualDesignRow('Direction', c.flexDirection),
+          visualDesignRow('Align', c.alignItems), visualDesignRow('Justify', c.justifyContent), visualDesignRow('Grid columns', c.gridTemplateColumns),
+          visualDesignRow('Grid rows', c.gridTemplateRows), visualDesignRow('Selector', selection.selector)
+        ])
+      ].filter(Boolean);
+      groups.forEach(group => box.appendChild(group));
+      if (!groups.length) { const empty=document.createElement('div'); empty.className='visual-design-empty'; empty.textContent='No computed design values were detected for this selection.'; box.appendChild(empty); }
+    }
+
     function renderVisualInspectorSelection(selection) {
       const panel = document.getElementById('visual-inspector-panel');
       const title = document.getElementById('visual-inspector-title');
@@ -22880,6 +22956,7 @@ setTimeout(function(){if(document.documentElement.getAttribute("data-d2-mounted"
       }
       details.replaceChildren();
       if (typeof renderTargetChooser === 'function') renderTargetChooser(selection);
+      renderVisualDesignSummary(selection);
       const parentHint = Array.isArray(selection.candidates) ? (selection.candidates.find(x => x.label === 'Parent') || {}).sel : null;
       details.append(
         inspectorSection('1. Target', [
@@ -22962,6 +23039,7 @@ setTimeout(function(){if(document.documentElement.getAttribute("data-d2-mounted"
 
     function clearVisualSelection() {
       STATE.activeVisualSelection = null;
+      renderVisualDesignSummary(null);
       document.getElementById('visual-inspector-panel')?.classList.remove('open');
       document.getElementById('visual-edit-help')?.classList.remove('open');
       const frame = document.getElementById('live-sandbox-frame');
