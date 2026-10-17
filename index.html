@@ -6,8 +6,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <title>DEBOOGER2000 | Visual Project Viewer & Inspector — V40</title>
-  <!-- DEBOOGER2000 V40: standalone visual project viewer, inspector, auditor, and exporter. -->
+  <title>DEBOOGER2000 | Visual Project Viewer & Inspector — V41</title>
+  <!-- DEBOOGER2000 V41: standalone visual project viewer, inspector, auditor, and exporter. -->
   <!-- Bundled ZIP engine: JSZip 3.10.1 (MIT/GPLv3 dual licensed; upstream license notice retained below). -->
   
   <style>
@@ -431,7 +431,105 @@ body:not(.project-valid) .visual-page-bar { display:none; }body.workspace-view-a
       box-shadow: none !important;
       flex: 1 1 auto !important;
     }.stage-container:fullscreen .iframe-sandbox,
-    .stage-container.preview-fallback-fullscreen .iframe-sandbox { width: 100% !important; height: 100% !important; }@media (orientation: landscape) and (max-width: 950px) {body.mobile-landscape-preview { overflow: hidden !important; background: #000 !important; }body.mobile-landscape-preview header, body.mobile-landscape-preview .visual-page-bar, body.mobile-landscape-preview .workspace-pane-left, body.mobile-landscape-preview .workspace-pane-right, body.mobile-landscape-preview .visual-inspector-panel, body.mobile-landscape-preview .workspace-tools-backdrop, body.mobile-landscape-preview .workspace-popover{ display: none !important; }body.mobile-landscape-preview .main-viewport { margin: 0 !important; width: 100dvw !important; height: 100dvh !important; min-width: 0 !important; overflow: hidden !important; }body.mobile-landscape-preview #view-workspace { display: flex !important; width: 100dvw !important; height: 100dvh !important; }body.mobile-landscape-preview .workspace-pane-center { position: fixed !important; inset: 0 !important; width: 100dvw !important; height: 100dvh !important; z-index: 4000; }body.mobile-landscape-preview .stage-container { position: fixed !important; inset: 0 !important; width:100dvw !important; height:100dvh !important; min-height:0 !important; padding: 0 !important; margin:0 !important; justify-content: stretch !important; align-items: stretch !important; overflow: hidden !important; background: #000 !important; touch-action: none; }body.mobile-landscape-preview .preview-sizer { width: 100% !important; height: 100% !important; }body.mobile-landscape-preview .device-viewport:not(.desktop-frame) { width: 100% !important; min-width: 0 !important; max-width: 100% !important; height: 100% !important; min-height: 100% !important; flex: 1 1 auto !important; transform-origin: 0 0; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }body.mobile-landscape-preview .device-viewport.desktop-frame { width: var(--d2-preview-w, 1200px) !important; min-width: var(--d2-preview-w, 1200px) !important; max-width: none !important; height: var(--d2-preview-h, 800px) !important; min-height: 0 !important; max-height: none !important; flex: 0 0 auto !important; transform-origin: 0 0; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }body.mobile-landscape-preview .iframe-sandbox { width: 100%; height: 100%; }}#paste-input-area,
+    .stage-container.preview-fallback-fullscreen .iframe-sandbox { width: 100% !important; height: 100% !important; }@media (orientation: landscape) and (max-width: 950px) {
+  body.mobile-landscape-preview {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100dvw !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: var(--bg-canvas, #f8fafc) !important;
+  }
+  body.mobile-landscape-preview header,
+  body.mobile-landscape-preview .visual-page-bar,
+  body.mobile-landscape-preview .workspace-pane-left,
+  body.mobile-landscape-preview .workspace-pane-right,
+  body.mobile-landscape-preview .visual-inspector-panel,
+  body.mobile-landscape-preview .workspace-tools-backdrop,
+  body.mobile-landscape-preview .workspace-popover,
+  body.mobile-landscape-preview .top-nav,
+  body.mobile-landscape-preview #header-actions {
+    display: none !important;
+  }
+  body.mobile-landscape-preview .main-viewport {
+    position: fixed !important;
+    inset: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100dvw !important;
+    height: 100dvh !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    background: var(--bg-canvas, #f8fafc) !important;
+  }
+  body.mobile-landscape-preview #view-workspace {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100dvw !important;
+    height: 100dvh !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: var(--bg-canvas, #f8fafc) !important;
+  }
+  body.mobile-landscape-preview .workspace-pane-center {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100dvw !important;
+    height: 100dvh !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 4000 !important;
+    background: var(--bg-canvas, #f8fafc) !important;
+  }
+  body.mobile-landscape-preview .stage-container {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100dvw !important;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    background: var(--bg-canvas, #f8fafc) !important;
+    touch-action: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  body.mobile-landscape-preview .preview-sizer {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  body.mobile-landscape-preview .device-viewport {
+    width: var(--d2-preview-w, 1200px) !important;
+    min-width: var(--d2-preview-w, 1200px) !important;
+    max-width: none !important;
+    height: var(--d2-preview-h, 800px) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    flex: 0 0 auto !important;
+    transform-origin: 0 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+  }
+  body.mobile-landscape-preview .iframe-sandbox {
+    width: 100% !important;
+    height: 100% !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+  }
+  body.mobile-landscape-preview .panoramic-exit {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+#paste-input-area,
     #ai-prompt-modal-text {
       background: #ffffff !important;
       color: #0f172a !important;
@@ -502,7 +600,7 @@ body:not(.project-valid) [data-project-action]{display:none!important}
     <header>
       <div class="topbar-brand" onclick="goProjectHome()" title="Home">
         <div class="topbar-logo">
-          <div class="logo-mark" aria-label="D2 version v40"><span class="logo-main">D2</span><span class="logo-version">v40</span></div>
+          <div class="logo-mark" aria-label="D2 version v41"><span class="logo-main">D2</span><span class="logo-version">v41</span></div>
           <div class="logo-text">DEBOOGER<span style="color:var(--primary)">2000</span></div>
         </div>
       </div>
@@ -19598,8 +19696,8 @@ module.exports = ZStream;
 
     function buildFullPreviewHtml(sourceHtml) {
       let html = String(sourceHtml || '');
-      const viewport = '<meta name="viewport" content="width=1200, minimum-scale=0.25, maximum-scale=5, user-scalable=yes">';
-      const fullCss = '<style id="d2-full-preview-style">html,body{min-width:1200px!important;max-width:none!important;}body{overflow-x:auto!important;-webkit-text-size-adjust:100%;}</style>';
+      const viewport = '<meta name="viewport" content="width=1200, initial-scale=0.325, minimum-scale=0.1, maximum-scale=5.0, user-scalable=yes, shrink-to-fit=no">';
+      const fullCss = '<style id="d2-full-preview-style">html{width:1200px!important;min-width:1200px!important;margin:0 auto!important;}body{width:1200px!important;min-width:1200px!important;max-width:none!important;margin:0 auto!important;overflow-x:auto!important;overflow-y:auto!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}#root,#app,main,.app-root{min-width:1200px!important;}</style>';
       html = html.replace(/<meta\b[^>]*name=["']viewport["'][^>]*>/ig, '');
       if (/<head\b[^>]*>/i.test(html)) return html.replace(/<head\b[^>]*>/i, match => match + viewport + fullCss);
       return '<!doctype html><html><head>' + viewport + fullCss + '</head><body>' + html + '</body></html>';
@@ -25602,7 +25700,7 @@ ${issues.length ? issues.map(visualIssueToPrompt).join('\n\n---\n\n') : 'No visu
 
       const unavailable = (STATE.auditReport.tests || []).filter(t => t.status === 'not-verified').map(t => `- ${t.label}: ${(t.details || []).join(' | ') || 'Unavailable in this run.'}`).join('\n');
       const notApplicable = (STATE.auditReport.tests || []).filter(t => t.status === 'not-applicable').map(t => `- ${t.label}`).join('\n');
-      const prompt = `# DEBOOGER2000 V40 — VERIFIED AI REPAIR PROMPT
+      const prompt = `# DEBOOGER2000 V41 — VERIFIED AI REPAIR PROMPT
 
 ## Project identity
 - Project Name: ${STATE.projectName}
@@ -25915,7 +26013,7 @@ Use saved source hints only when marked exact or verified. If a marker has no sa
       let startX = 0, startY = 0, left = 0, top = 0, moved = false;
       btn.tabIndex = 0;
       try {
-        const saved = JSON.parse(localStorage.getItem('d2-v28-exit-position') || 'null');
+        const saved = JSON.parse(localStorage.getItem('d2-v41-exit-position') || 'null');
         if (saved && Number.isFinite(saved.left) && Number.isFinite(saved.top)) {
           btn.style.left = Math.max(4, Math.min(window.innerWidth - btn.offsetWidth - 4, saved.left)) + 'px';
           btn.style.top = Math.max(4, Math.min(window.innerHeight - btn.offsetHeight - 4, saved.top)) + 'px';
@@ -25939,7 +26037,7 @@ Use saved source hints only when marked exact or verified. If a marker has no sa
       });
       btn.addEventListener('pointerup', () => {
         if (!moved) return;
-        try { localStorage.setItem('d2-v28-exit-position', JSON.stringify({ left:parseFloat(btn.style.left)||4, top:parseFloat(btn.style.top)||4 })); } catch (_) {}
+        try { localStorage.setItem('d2-v41-exit-position', JSON.stringify({ left:parseFloat(btn.style.left)||4, top:parseFloat(btn.style.top)||4 })); } catch (_) {}
       });
       btn.addEventListener('keydown', event => {
         const move = { ArrowLeft:[-8,0], ArrowRight:[8,0], ArrowUp:[0,-8], ArrowDown:[0,8] }[event.key];
@@ -25949,7 +26047,7 @@ Use saved source hints only when marked exact or verified. If a marker has no sa
         const nextLeft = Math.max(4, Math.min(window.innerWidth - btn.offsetWidth - 4, rect.left + move[0]));
         const nextTop = Math.max(4, Math.min(window.innerHeight - btn.offsetHeight - 4, rect.top + move[1]));
         btn.style.left = nextLeft + 'px'; btn.style.top = nextTop + 'px';
-        try { localStorage.setItem('d2-v28-exit-position', JSON.stringify({ left:nextLeft, top:nextTop })); } catch (_) {}
+        try { localStorage.setItem('d2-v41-exit-position', JSON.stringify({ left:nextLeft, top:nextTop })); } catch (_) {}
       });
       btn.addEventListener('click', event => { if (moved) { event.preventDefault(); event.stopImmediatePropagation(); moved = false; } }, true);
     }
