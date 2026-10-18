@@ -1,0 +1,49 @@
+name: Publish latest DEBOOGER HTML
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'deboog.*.html'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-latest-deboog
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update homepage from newest numbered HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          latest="$(find . -maxdepth 1 -type f -name 'deboog.*.html' -printf '%f\n' \
+            | grep -E '^deboog\.[0-9]+\.html$' \
+            | sort -t . -k 2,2n \
+            | tail -n 1)"
+          if [[ -z "$latest" ]]; then
+            echo 'No numbered DEBOOGER HTML found (expected deboog.03.html, etc.).' >&2
+            exit 1
+          fi
+          echo "Selected latest source: $latest"
+          if cmp -s -- "$latest" index.html; then
+            echo "index.html already matches $latest; no changes needed."
+            exit 0
+          fi
+          cp -- "$latest" index.html
+          git add -- index.html
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "Publish $latest as index.html"
+          git push origin HEAD:main
