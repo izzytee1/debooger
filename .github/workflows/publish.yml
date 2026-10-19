@@ -1,0 +1,106 @@
+name: Publish Debooger
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'deboog*.html'
+      - 'index.html'
+      - 'Index.html'
+      - '.github/workflows/publish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: debooger-pages
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare latest uploaded HTML
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          import shutil
+          from pathlib import Path
+
+          root = Path.cwd()
+          site = root / 'pages-output'
+          site.mkdir(exist_ok=True)
+          index = root / 'index.html'
+          alternate_index = root / 'Index.html'
+          version_name = re.compile(r'^deboog\.(\d+)(?:[ ._-].*)?\.html$', re.I)
+
+          def version(path):
+              match = version_name.fullmatch(path.name)
+              return int(match.group(1)) if match else -1
+
+          def embedded_version(path):
+              if not path.is_file():
+                  return -1
+              match = re.search(rb'deboog\.(\d+)', path.read_bytes()[:4096], re.I)
+              return int(match.group(1)) if match else -1
+
+          event_path = os.environ.get('GITHUB_EVENT_PATH', '')
+          event = json.loads(Path(event_path).read_text()) if event_path else {}
+          changed = set()
+          for commit in event.get('commits', []):
+              for field in ('added', 'modified'):
+                  changed.update(commit.get(field, []))
+
+          versions = [p for p in root.iterdir() if p.is_file() and version(p) >= 0]
+          changed_versions = [p for p in versions if p.name in changed]
+          selected = index
+
+          if 'index.html' in changed and index.is_file():
+              selected = index
+          elif 'Index.html' in changed and alternate_index.is_file():
+              selected = alternate_index
+          elif changed_versions:
+              recent = max(changed_versions, key=lambda p: (version(p), p.name))
+              selected = recent if version(recent) >= embedded_version(index) else index
+          elif versions:
+              latest = max(versions, key=lambda p: (version(p), p.name))
+              selected = latest if version(latest) > embedded_version(index) else index
+
+          if not selected.is_file():
+              raise SystemExit('No HTML found. Upload deboog.09.html to the repository root.')
+          if b'<html' not in selected.read_bytes()[:10000].lower():
+              raise SystemExit(f'{selected.name} is not an HTML document.')
+
+          shutil.copyfile(selected, site / 'index.html')
+          if selected.name != 'index.html':
+              shutil.copyfile(selected, site / selected.name)
+          (site / '.nojekyll').touch()
+          (site / 'version.txt').write_text(
+              f'Source: {selected.name}\nCommit: {os.environ.get("GITHUB_SHA", "unknown")}\n',
+              encoding='utf-8',
+          )
+          print(f'Publishing {selected.name} as index.html')
+          PY
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages files
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: pages-output
+
+      - name: Deploy
+        id: deploy
+        uses: actions/deploy-pages@v4
